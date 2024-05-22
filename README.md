@@ -1,30 +1,30 @@
-<p><H3>�I�[���E�F�[�u DSP���W�IIC SI4732��Pi Pico�Ő��䂷��</H3></p>
+<p><H3>オールウェーブ DSPラジオIC SI4732をPi Picoで制御する</H3></p>
 <p>
-GitHub�ɂ���SI4732��<a href="https://github.com/pu2clr/SI4735">���C�u����</a>�ɂ́APi Pico��SI4732�𐧌䂷�邱�Ƃ��ł���Ƃ���A"example"�ɗႪ����B<br>
-�����ł́A�@�\�I�Ɋ������Ă���Arduino Pro mini�Ή���"SI47XX_02_ALL_IN_ONE_OLED"��Pi Pico�p�ɉ��C������������B<br>
-�J����Arduino IDE 2.1�ōs�����B<br>
+GitHubにあるSI4732の<a href="https://github.com/pu2clr/SI4735">ライブラリ</a>には、Pi PicoでSI4732を制御することができるとあり、"example"に例がある。<br>
+ここでは、機能的に完結しているArduino Pro mini対応の"SI47XX_02_ALL_IN_ONE_OLED"をPi Pico用に改修した例を示す。<br>
+開発はArduino IDE 2.1で行った。<br>
 </p>
 
-<p><strong>�T�v</strong><br>
-���C�O�̃X�P�b�`�ł́A������{�^���ƃ��[�^���[�G���R�[�_�[�ōs���Ă���B����́A���̂܂ܕύX���Ȃ����Ƃɂ���BI2C�ƃ��Z�b�g�̃s���͕ύX����B<br>
-�Ȃ��A��H�i"schematic2.pdf"�j�Ƃ��ẮASI4732�̃I�[�f�B�I�o�͕s����₤���߂Ɗ��x����̂��߁A�I�y�A���v�̑�����H�i���[�p�X�t�B���^�t�j��<br>
-�g�����W�X�^�̍����g������H��ǉ����Ă���B<br>
-�����ɂ��Ă͊�iPCB�j�����s�����B<br>
+<p><strong>概要</strong><br>
+改修前のスケッチでは、操作をボタンとロータリーエンコーダーで行っている。これは、このまま変更しないことにする。I2Cとリセットのピンは変更する。<br>
+なお、回路（"schematic2.pdf"）としては、SI4732のオーディオ出力不足を補うためと感度向上のため、オペアンプの増幅回路（ローパスフィルタ付）と<br>
+トランジスタの高周波増幅回路を追加している。<br>
+実装については基板（PCB）化を行った。<br>
 </p>
-<p><strong>H/W�\��</strong><br>
- �ERaspberry Pi Pico - �R���g���[��<br>
- �EI2C�ڑ�&nbsp; SI4732<br>
- �EI2C�ڑ�&nbsp; OLED�\�����u(SSD1306)<br>
- �E�{�^���ƃ��[�^���[�G���R�[�_�[<br>
- �E�I�y�A���v NJM4580<br>
- �E�����g���� �g�����W�X�^ S9018<br>
- �EXtal���U��i32768Hz�j�A��R�E�R���f���T�ށA�I�[�f�B�I�W���b�N�A�z����<br>
+<p><strong>H/W構成</strong><br>
+ ・Raspberry Pi Pico - コントローラ<br>
+ ・I2C接続&nbsp; SI4732<br>
+ ・I2C接続&nbsp; OLED表示装置(SSD1306)<br>
+ ・ボタンとロータリーエンコーダー<br>
+ ・オペアンプ NJM4580<br>
+ ・高周波増幅 トランジスタ S9018<br>
+ ・Xtal発振器（32768Hz）、抵抗・コンデンサ類、オーディオジャック、配線類<br>
 </p>
 <p>
 <img src="./SI4732_Pi_Pico_1.jpg" width="480" height="360"><br>
 </p>
-<p><strong>�ڑ�</strong><br>
-�e�R���|�[�l���g�̐ڑ��͈ȉ��̒ʂ�B<br>
+<p><strong>接続</strong><br>
+各コンポーネントの接続は以下の通り。<br>
 <p>
 <table> 
 <tr>
@@ -41,29 +41,31 @@ GitHub�ɂ���SI4732��<a href="https://github.com/pu2clr/SI4735">���C�u����</a>�ɂ
 </tr>
 </table>
 </p>
-*���̑��̐ڑ��ɂ��ẮA�X�P�b�`���Q�Ƃ̂���<br>
-**�v���A�b�v��R�͏ȗ���<br>
+*その他の接続については、スケッチを参照のこと<br>
+**プルアップ抵抗は省略可<br>
 </p>
-<p><strong>�C���X�g�[��</strong><br>
+<p><strong>インストール</strong><br>
 <ol>
-<li>�R�[�h���AZIP�`���Ń_�E�����[�h</li>
-<li>�ǉ��̃��C�u�������AZIP�`���Ń_�E�����[�h���̓��C�u�����}�l�[�W������C���X�g�[������</li>
+<li>コードを、ZIP形式でダウンロード</li>
+<li>追加のライブラリを、ZIP形式でダウンロード又はライブラリマネージャからインストールする</li>
  <ul>
-  <li>SI4735�i���C�u�����}�l�[�W�����猟���j</li>
-  <li>Tiny4kOLED�i���C�u�����}�l�[�W�����猟���j</li>
+  <li>SI4735（ライブラリマネージャから検索可）</li>
+  <li>Tiny4kOLED（ライブラリマネージャから検索可）</li>
  </ul>
-<li>ArduinoIDE����SI47XX_02_ALL_IN_ONE_OLED_pi_pico_master.ino���J��</li>
-<li>�u���؁E�R���p�C���v�ɐ���������A��U�A�u���O��t���ĕۑ��v���s��</li>
+<li>ArduinoIDEからSI47XX_02_ALL_IN_ONE_OLED_pi_pico_master.inoを開く</li>
+<li>「検証・コンパイル」に成功したら、一旦、「名前を付けて保存」を行う</li>
 </ol>
 </p>
-<p><strong>�኱�̉��</strong><br>
-�ESTEP�̃{�^���i�G���R�[�_�ɐڑ��j�́AFM��M���͎��g���̃v���Z�b�g�i�ϐ�"fmstation[] "�ɒ�`�j�؂�ւ��Ƃ��ē��삷��B<br>
-�E�d���������Pi Pico��LED���_������B<br>
-�E�ϐ�"Band band[]"�̂S�Ԗڂ̒萔�́A�o���h�؂�ւ����̊���̎�M���g���ł���B�n��̕����ǂɍ��킹��Ɨǂ��B<br>
+<p><strong>若干の解説</strong><br>
+・STEPのボタン（エンコーダに接続）は、FM受信中は周波数のプリセット（変数"fmstation[] "に定義）切り替えとして動作する。<br>
+・電源を入れるとPi PicoのLEDが点灯する。<br>
+・変数"Band band[]"の４番目の定数は、バンド切り替え時の既定の受信周波数である。地域の放送局に合わせると良い。<br>
+・Ant Select(J4)のジャンパー設定にて、AMの場合に、アンテナ直結か高周波増幅回路経由かを選択できる。
+・プルアップ抵抗(R9,R10)は実装しなくても動作する。
 <p>
 <img src="./SI4732_Pi_Pico_2.jpg" width="540" height="360"><br>
 </p>
 </p>
-<p><strong>���ӎ���</strong><br>
-�E���p�̍ۂ́A���ȐӔC�ł��y���݂��������B<br>
+<p><strong>注意事項</strong><br>
+・利用の際は、自己責任でお楽しみください。<br>
 </p>
