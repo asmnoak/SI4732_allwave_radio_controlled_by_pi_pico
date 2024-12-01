@@ -9,7 +9,7 @@ GitHubにあるSI4732の<a href="https://github.com/pu2clr/SI4735">ライブラ�
 改修前のスケッチでは、操作をボタンとロータリーエンコーダーで行っている。これは、このまま変更しないことにする。I2Cとリセットのピンは変更する。<br>
 なお、回路（"schematic2.pdf"）としては、SI4732のオーディオ出力不足を補うためと感度向上のため、オペアンプの増幅回路（ローパスフィルタ付）と<br>
 トランジスタの高周波増幅回路を追加している。<br>
-実装については基板（PCB）化を行った。<br>
+実装については<a href="https://www.pcbway.com/project/shareproject/SI4732_Allwave_DSP_radio_controlled_by_Pi_Pico_b690d5cd.html">基板（PCB）</a>化を行った。<br>
 </p>
 <p><strong>H/W構成</strong><br>
  ・Raspberry Pi Pico - コントローラ<br>
